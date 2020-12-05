@@ -1,5 +1,5 @@
 #!/bin/bash
-PUPPETBIN=/opt/puppetlabs/puppet/bin/puppet
+PUPPETBIN=/opt/puppetlabs/bin/puppetserver
 if [ $# -ne 1 ];then
     echo "Usage: `basename $0` {vmname}"
     exit 1
@@ -33,7 +33,7 @@ fi
 # Clean any previous puppet key for the machine
 test -f $PUPPETBIN
 if [ $? -eq 0 ];then
-    sudo $PUPPETBIN cert clean $VM.$DOMAIN
+    sudo $PUPPETBIN ca clean --certname $VM.$DOMAIN
 fi
 
 # Delete any previous known ssh key for the host
